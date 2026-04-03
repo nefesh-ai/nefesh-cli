@@ -20,6 +20,9 @@ const AGENTS: Record<string, { path: string; format: "json" | "merge" }> = {
   windsurf: { path: join(homedir(), ".codeium", "windsurf", "mcp_config.json"), format: "merge" },
   kiro: { path: join(homedir(), ".kiro", "mcp.json"), format: "merge" },
   openclaw: { path: join(homedir(), ".config", "openclaw", "mcp.json"), format: "merge" },
+  cline: { path: join(homedir(), ".cline", "cline_mcp_settings.json"), format: "merge" },
+  "roo-code": { path: join(process.cwd(), ".roo", "mcp.json"), format: "merge" },
+  "claude-desktop-win": { path: join(homedir(), "AppData", "Roaming", "Claude", "claude_desktop_config.json"), format: "merge" },
 };
 
 export function setupCommand(program: Command): void {

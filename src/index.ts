@@ -15,7 +15,7 @@ const program = new Command();
 program
   .name("nefesh")
   .description("Nefesh CLI — Real-time human state awareness for AI. https://nefesh.ai")
-  .version("1.0.0");
+  .version("1.1.0");
 
 authCommand(program);
 ingestCommand(program);

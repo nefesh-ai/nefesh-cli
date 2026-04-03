@@ -43,13 +43,22 @@ const SCENARIOS: Record<string, { name: string; generate: (tick: number) => Reco
       sentiment: 0.0 + Math.random() * 0.2,
     }),
   },
+  acute_stress: {
+    name: "Acute stress episode",
+    generate: (tick) => ({
+      heart_rate: 105 + Math.round(Math.random() * 15),
+      rmssd: 12 + Math.round(Math.random() * 5),
+      tone: "hostile",
+      sentiment: -0.8 + Math.random() * 0.2,
+    }),
+  },
 };
 
 export function simulateCommand(program: Command): void {
   program
     .command("simulate")
     .description("Stream simulated biometric data for testing")
-    .option("--scenario <name>", "Scenario: calm, stress_spike, recovery, focused", "stress_spike")
+    .option("--scenario <name>", "Scenario: calm, stress_spike, recovery, focused, acute_stress", "stress_spike")
     .option("--session <id>", "Session ID", `sim-${Date.now()}`)
     .option("--duration <seconds>", "Duration in seconds", "120")
     .option("--interval <seconds>", "Seconds between sends", "2")

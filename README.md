@@ -70,19 +70,23 @@ nefesh simulate --scenario stress_spike --session demo
 # [34s] stressed      ██████████████░░░░░░ 72
 ```
 
-Scenarios: `calm`, `stress_spike`, `recovery`, `focused`.
+Scenarios: `calm`, `stress_spike`, `recovery`, `focused`, `acute_stress`.
 
 ## MCP setup
 
 Auto-configure Nefesh for any MCP-compatible AI agent:
 
 ```bash
-nefesh setup cursor       # ~/.cursor/mcp.json
-nefesh setup claude-code  # .mcp.json
-nefesh setup vscode       # .vscode/mcp.json
-nefesh setup windsurf     # ~/.codeium/windsurf/mcp_config.json
-nefesh setup kiro         # ~/.kiro/mcp.json
-nefesh setup openclaw     # ~/.config/openclaw/mcp.json
+nefesh setup cursor            # ~/.cursor/mcp.json
+nefesh setup claude-desktop    # ~/Library/.../Claude/claude_desktop_config.json
+nefesh setup claude-code       # .mcp.json
+nefesh setup vscode            # .vscode/mcp.json
+nefesh setup windsurf          # ~/.codeium/windsurf/mcp_config.json
+nefesh setup kiro              # ~/.kiro/mcp.json
+nefesh setup openclaw          # ~/.config/openclaw/mcp.json
+nefesh setup cline             # ~/.cline/cline_mcp_settings.json
+nefesh setup roo-code          # .roo/mcp.json
+nefesh setup claude-desktop-win # (Windows) ~/AppData/Roaming/Claude/...
 ```
 
 ## Environment variables
