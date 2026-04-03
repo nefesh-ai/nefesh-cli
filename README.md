@@ -43,7 +43,7 @@ nefesh state test-001 --json
 | `nefesh history SESSION_ID` | Get state history with trend |
 | `nefesh triggers SUBJECT_ID` | Get trigger memory profile |
 | `nefesh delete SUBJECT_ID --confirm` | GDPR cascading deletion |
-| `nefesh simulate --scenario stress_spike` | Stream test data for 2 minutes |
+| `nefesh simulate --scenario stressed` | Stream test data for 2 minutes |
 | `nefesh setup cursor` | Auto-configure MCP for Cursor |
 | `nefesh setup claude-code` | Auto-configure MCP for Claude Code |
 | `nefesh setup vscode` | Auto-configure MCP for VS Code |
@@ -62,15 +62,13 @@ nefesh state test-001 --json
 Stream realistic test data without real sensors:
 
 ```bash
-nefesh simulate --scenario stress_spike --session demo
-# [0s]  calm          ████████░░░░░░░░░░░░ 38
-# [2s]  calm          ███████░░░░░░░░░░░░░ 35
-# ...
-# [32s] stressed      █████████████░░░░░░░ 68
-# [34s] stressed      ██████████████░░░░░░ 72
+nefesh simulate --scenario stressed --session demo
+# [0s]  stressed      █████████████░░░░░░░ 68
+# [2s]  stressed      ██████████████░░░░░░ 72
+# [4s]  stressed      █████████████░░░░░░░ 65
 ```
 
-Scenarios: `calm`, `stress_spike`, `recovery`, `focused`, `acute_stress`.
+Scenarios: `calm`, `relaxed`, `focused`, `stressed`, `acute_stress`.
 
 ## MCP setup
 

@@ -5,37 +5,25 @@ import chalk from "chalk";
 
 const SCENARIOS: Record<string, { name: string; generate: (tick: number) => Record<string, any> }> = {
   calm: {
-    name: "Calm baseline",
+    name: "Calm state (score 0-19)",
     generate: (tick) => ({
-      heart_rate: 65 + Math.round(Math.random() * 6 - 3),
-      rmssd: 55 + Math.round(Math.random() * 10 - 5),
+      heart_rate: 62 + Math.round(Math.random() * 6 - 3),
+      rmssd: 60 + Math.round(Math.random() * 10 - 5),
       tone: "calm",
-      sentiment: 0.3 + Math.random() * 0.3,
+      sentiment: 0.4 + Math.random() * 0.3,
     }),
   },
-  stress_spike: {
-    name: "Stress spike after 30s",
-    generate: (tick) => {
-      const stressed = tick > 30;
-      return {
-        heart_rate: stressed ? 95 + Math.round(Math.random() * 10) : 68 + Math.round(Math.random() * 6 - 3),
-        rmssd: stressed ? 18 + Math.round(Math.random() * 6) : 52 + Math.round(Math.random() * 10 - 5),
-        tone: stressed ? "tense" : "calm",
-        sentiment: stressed ? -0.5 + Math.random() * 0.3 : 0.2 + Math.random() * 0.3,
-      };
-    },
-  },
-  recovery: {
-    name: "Stress then recovery",
-    generate: (tick) => {
-      const phase = tick < 40 ? "stress" : tick < 80 ? "recovery" : "calm";
-      if (phase === "stress") return { heart_rate: 92 + Math.round(Math.random() * 8), rmssd: 20 + Math.round(Math.random() * 5), tone: "anxious", sentiment: -0.6 };
-      if (phase === "recovery") return { heart_rate: 78 + Math.round(Math.random() * 6 - 3), rmssd: 38 + Math.round(Math.random() * 8), tone: "calm", sentiment: 0.1 };
-      return { heart_rate: 66 + Math.round(Math.random() * 4 - 2), rmssd: 55 + Math.round(Math.random() * 8), tone: "calm", sentiment: 0.4 };
-    },
+  relaxed: {
+    name: "Relaxed state (score 20-39)",
+    generate: (tick) => ({
+      heart_rate: 68 + Math.round(Math.random() * 6 - 3),
+      rmssd: 50 + Math.round(Math.random() * 10 - 5),
+      tone: "calm",
+      sentiment: 0.2 + Math.random() * 0.3,
+    }),
   },
   focused: {
-    name: "Deep focus session",
+    name: "Focused state (score 40-59)",
     generate: (tick) => ({
       heart_rate: 75 + Math.round(Math.random() * 8 - 4),
       rmssd: 35 + Math.round(Math.random() * 8 - 4),
@@ -43,8 +31,17 @@ const SCENARIOS: Record<string, { name: string; generate: (tick: number) => Reco
       sentiment: 0.0 + Math.random() * 0.2,
     }),
   },
+  stressed: {
+    name: "Stressed state (score 60-79)",
+    generate: (tick) => ({
+      heart_rate: 92 + Math.round(Math.random() * 10 - 5),
+      rmssd: 20 + Math.round(Math.random() * 6 - 3),
+      tone: "tense",
+      sentiment: -0.4 + Math.random() * 0.2,
+    }),
+  },
   acute_stress: {
-    name: "Acute stress episode",
+    name: "Acute stress state (score 80-100)",
     generate: (tick) => ({
       heart_rate: 105 + Math.round(Math.random() * 15),
       rmssd: 12 + Math.round(Math.random() * 5),
@@ -58,7 +55,7 @@ export function simulateCommand(program: Command): void {
   program
     .command("simulate")
     .description("Stream simulated biometric data for testing")
-    .option("--scenario <name>", "Scenario: calm, stress_spike, recovery, focused, acute_stress", "stress_spike")
+    .option("--scenario <name>", "Scenario: calm, relaxed, focused, stressed, acute_stress", "relaxed")
     .option("--session <id>", "Session ID", `sim-${Date.now()}`)
     .option("--duration <seconds>", "Duration in seconds", "120")
     .option("--interval <seconds>", "Seconds between sends", "2")
