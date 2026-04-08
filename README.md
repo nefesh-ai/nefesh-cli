@@ -2,6 +2,8 @@
 
 Official CLI for the [Nefesh API](https://nefesh.ai). Ingest biometric signals, query human state, manage API keys, and auto-setup MCP for AI agents.
 
+**Docs:** [nefesh.ai/docs/cli](https://nefesh.ai/docs/cli) · **npm:** [@nefesh/cli](https://www.npmjs.com/package/@nefesh/cli) · **Get a free API key:** [nefesh.ai/signup](https://nefesh.ai/signup)
+
 ## Install
 
 ```bash
